@@ -27,9 +27,9 @@ Yes, Django signals run in the same thread as the caller by default. Signals in 
 
 To demonstrate this, I will provide a code snippet that shows the thread identity of the caller and the signal handler. The thread ID will be the same, proving that signals run in the same thread.
 
-Let's define a signal in models.py and connect a signal handler that logs the current thread ID.
+Let's define a signal in [models.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/models.py) and connect a signal handler that logs the current thread ID.
 
-In a Django shell or view, create an instance of MyModel and observe the thread ID of both the caller and the signal handler.
+In a Django view [view.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/view.py), create an instance of MyModel and observe the thread ID of both the caller and the signal handler.
 
 When you run the code (for example, in the Django shell), the output will look something like ![dash board snap](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/Answer%20of%20question%202.png)
 
