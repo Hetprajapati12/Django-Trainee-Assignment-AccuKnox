@@ -9,7 +9,7 @@ By default, Django signals are executed synchronously. This means that when a si
 
 ![dashboard snap](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/Answer%20of%20question%201.png)
 
-Here ![Answer1.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/Answer1.py) is the simple code snippet. It will prove that signals run synchronously:
+Here [Answer1.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/Answer1.py) is the simple code snippet. It will prove that signals run synchronously:
 
 First of all, I will create a model and connect a signal to it.
 
