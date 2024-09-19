@@ -44,7 +44,8 @@ Yes, by default, Django signals run in the same database transaction as the call
 Django signals that are triggered after database operations, like post_save or post_delete, will only be executed after the transaction is successfully committed.
 
 To demonstrate this, here is a simple example:
-models1.py: We defined a simple model and a signal that is triggered on post_save. The signal will modify the database again, and we raised an exception in the signal handler to see if the entire transaction rolls back.
+
+[models1.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/models1.py): We defined a simple model and a signal that is triggered on post_save. The signal will modify the database again, and we raised an exception in the signal handler to see if the entire transaction rolls back.
 
 Now, we will test this using Django's shell. When we try to create an instance of MyModel, the signal will trigger and raise an exception. we expect the entire transaction to roll back, meaning that no changes will be saved to the database.
 
