@@ -25,7 +25,7 @@ Do django signals run in the same thread as the caller? Please support your answ
 ## Answer-2
 Yes, Django signals run in the same thread as the caller by default. Signals in Django are synchronous, meaning that the signal is processed in the same thread as the code that triggered the signal.
 
-To demonstrate this, I will provide a code snippet that shows the thread identity of the caller and the signal handler. The thread ID will be the same, proving that signals run in the same thread.
+To demonstrate this, I provided a code snippet that shows the thread identity of the caller and the signal handler. The thread ID will be the same, proving that signals run in the same thread.
 
 Let's define a signal in [models.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/models.py) and connect a signal handler that logs the current thread ID.
 
@@ -35,3 +35,25 @@ When you run the code (for example, in the Django shell), the output will look s
 
 As you can see, both the caller and the signal handler share the same thread ID (14048 in this example), confirming that Django signals run in the same thread as the caller.
 
+## Question-3
+By default do django signals run in the same database transaction as the caller? Please support your answer with a code snippet that conclusively proves your stance. The code does not need to be elegant and production ready, we just need to understand your logic.
+
+## Answer-3
+Yes, by default, Django signals run in the same database transaction as the caller. This means that if a database operation (such as a model save) triggers a signal, and either the signal or the caller raises an exception, the entire transaction will be rolled back.
+
+Django signals that are triggered after database operations, like post_save or post_delete, will only be executed after the transaction is successfully committed.
+
+To demonstrate this, here is a simple example:
+models1.py: We defined a simple model and a signal that is triggered on post_save. The signal will modify the database again, and we raised an exception in the signal handler to see if the entire transaction rolls back.
+
+Now, we will test this using Django's shell. When we try to create an instance of MyModel, the signal will trigger and raise an exception. we expect the entire transaction to roll back, meaning that no changes will be saved to the database.
+
+The post_save signal is triggered when MyModel.objects.create(name="Original Name") is called.
+
+Inside the signal handler, the instance's name is modified and saved again, but an exception is raised afterward.
+
+Since the signal and the original save operation are in the same database transaction, the exception will cause the entire transaction to roll back.
+
+As a result, the newly created MyModel instance will not be saved to the database.
+
+The exception message will be printed, and no objects will be found in the database due to the rollback:
