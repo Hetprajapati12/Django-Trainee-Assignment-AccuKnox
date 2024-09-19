@@ -57,4 +57,18 @@ Since the signal and the original save operation are in the same database transa
 
 As a result, the newly created MyModel instance will not be saved to the database.
 
-The exception message will be printed, and no objects will be found in the database due to the rollback:
+The exception message will be printed, and no objects will be found in the database due to the rollback.
+
+## Topic: Custom Classes in Python
+
+Description: You are tasked with creating a Rectangle class with the following requirements:
+
+1.An instance of the Rectangle class requires length:int and width:int to be initialized.
+2.We can iterate over an instance of the Rectangle class 
+3.When an instance of the Rectangle class is iterated over, we first get its length in the format: {'length': <VALUE_OF_LENGTH>} followed by the width {width: <VALUE_OF_WIDTH>}
+
+## Answer
+
+Here I have created Rectangle class with the above requirements in [main.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/main.py) and the output also attached here.
+
+![answer](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/answer.png)
