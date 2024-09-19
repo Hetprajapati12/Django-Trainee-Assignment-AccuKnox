@@ -15,6 +15,6 @@ First of all, I will create a model and connect a signal to it.
 
 The signal receiver will introduce a delay using time.sleep().
 
-I wll measure the time taken to create an object and confirm that the signal blocks the main thread.
+I will measure the time taken to create an object and confirm that the signal blocks the main thread.
 
 As you can see in above image, that indicates the output of the program. The signal processing (with the 5-second delay) completes before the main process (create_model_instance) finishes. This proves that Django signals, by default, are executed synchronously. If they were asynchronous, the model instance creation would complete before the signal processing.
