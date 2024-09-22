@@ -39,25 +39,28 @@ As you can see, both the caller and the signal handler share the same thread ID 
 By default do django signals run in the same database transaction as the caller? Please support your answer with a code snippet that conclusively proves your stance. The code does not need to be elegant and production ready, we just need to understand your logic.
 
 ## Answer-3
-Yes, by default, Django signals run in the same database transaction as the caller. This means that if a database operation (such as a model save) triggers a signal, and either the signal or the caller raises an exception, the entire transaction will be rolled back.
+Yes, by default, Django signals run in the same database transaction as the caller. To demonstrate this, we can use a combination of a model, a signal, and database transaction behavior. When the signal is triggered during a model save, if the transaction is rolled back, the signal handler’s actions are also rolled back, indicating that both share the same transaction.
 
-Django signals that are triggered after database operations, like post_save or post_delete, will only be executed after the transaction is successfully committed.
+Here is a simple example:
 
-To demonstrate this, here is a simple example:
+[models1.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/models1.py): 
 
-[models1.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/models1.py): We defined a simple model and a signal that is triggered on post_save. The signal will modify the database again, and we raised an exception in the signal handler to see if the entire transaction rolls back.
 
-Now, I will test this using Django's shell. When I try to create an instance of MyModel, the signal will trigger and raise an exception. I expect the entire transaction to roll back, meaning that no changes will be saved to the database.
+Model Definition: I create a simple model TestModel with a single field name.
 
-The post_save signal is triggered when MyModel.objects.create(name="Original Name") is called.
+Signal Definition: A post_save signal is connected to the TestModel model. When the model is saved, the signal will print a message and, if the name is "rollback", it will raise a ValidationError.
 
-Inside the signal handler, the instance's name is modified and saved again, but an exception is raised afterward.
+Transaction Block: Inside the test_signal_and_transaction function, I create a new TestModel instance in a manual transaction block (transaction.atomic()), which ensures everything happens within a single transaction.
 
-Since the signal and the original save operation are in the same database transaction, the exception will cause the entire transaction to roll back.
+Triggering Rollback: When "rollback" is passed as the name, the signal handler raises a ValidationError, which rolls back the transaction.
 
-As a result, the newly created MyModel instance will not be saved to the database.
+Proof of Rollback: After the exception is raised, I check whether the object was actually saved to the database. If it wasn't saved, it proves that the signal and the caller are part of the same transaction.
 
-The exception message will be printed, and no objects will be found in the database due to the rollback.
+![dash board snap](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/Answer%20of%20question%203.png)
+
+
+The output shows that the object was not saved in the database (the count is 0), confirming that the signal ran within the same transaction as the caller. When the transaction was rolled back, both the model save and the signal handler's actions were rolled back together, proving that they share the same database transaction.
+
 
 ## Topic: Custom Classes in Python
 
