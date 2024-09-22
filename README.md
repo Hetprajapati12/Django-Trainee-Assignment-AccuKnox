@@ -31,7 +31,7 @@ Let's define a signal in [models.py](https://github.com/Hetprajapati12/Django-Tr
 
 In a Django view [view.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/view.py), create an instance of MyModel and observe the thread ID of both the caller and the signal handler.
 
-When you run the code (for example, in the Django shell), the output will look something like ![dash board snap](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/Answer%20of%20question%202.png)
+When I run the code (for example, in the Django shell), the output will look something like ![dash board snap](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/Answer%20of%20question%202.png)
 
 As you can see, both the caller and the signal handler share the same thread ID (14048 in this example), confirming that Django signals run in the same thread as the caller.
 
@@ -47,7 +47,7 @@ To demonstrate this, here is a simple example:
 
 [models1.py](https://github.com/Hetprajapati12/Django-Trainee-Assignment-AccuKnox/blob/main/models1.py): We defined a simple model and a signal that is triggered on post_save. The signal will modify the database again, and we raised an exception in the signal handler to see if the entire transaction rolls back.
 
-Now, we will test this using Django's shell. When we try to create an instance of MyModel, the signal will trigger and raise an exception. we expect the entire transaction to roll back, meaning that no changes will be saved to the database.
+Now, I will test this using Django's shell. When I try to create an instance of MyModel, the signal will trigger and raise an exception. I expect the entire transaction to roll back, meaning that no changes will be saved to the database.
 
 The post_save signal is triggered when MyModel.objects.create(name="Original Name") is called.
 
